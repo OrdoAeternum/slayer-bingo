@@ -1,0 +1,7 @@
+1. save your changes with ctrl +s, or file > save, as usual...
+2. make sure git sees you're changes. ```git status```
+3. you should see files modified, deleted, replaced, or deleted...
+4. stage all of your changes. ```git add .```
+5. check git status again, everything should be staged.
+6. now commit your staged changes with a message that will make sense to anyone!!. ```git commit -m "My clear message. Not 'fixed' or something."```
+7. now our commit with all our changes is on our LOCAL repo. We need to push it to github. ```git push```
