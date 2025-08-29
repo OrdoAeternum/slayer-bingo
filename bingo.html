@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSRS Slayer Event Bingo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #2B1B0C;
+            color: #F5DEB3;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #D4AF37;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #CD853F;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .bingo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+            background-color: #1A0F08;
+            padding: 20px;
+            border-radius: 8px;
+            border: 3px solid #8B4513;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .bingo-cell {
+            background: linear-gradient(135deg, #5C3A00, #4A2C00);
+            border: 2px solid #8B4513;
+            border-radius: 6px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bingo-cell:hover {
+            transform: translateY(-2px);
+            border-color: #D4AF37;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, #6B4500, #5A3500);
+        }
+
+        .bingo-cell.completed {
+            background: linear-gradient(135deg, #A67C00, #8B6914);
+            border-color: #FFD700;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .bingo-cell.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 1.5rem;
+            color: #00FF00;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .bingo-cell.completed:hover {
+            background: linear-gradient(135deg, #B8860B, #9A7B0A);
+        }
+
+        .info-section {
+            background: linear-gradient(135deg, #3D2817, #2A1A10);
+            border: 2px solid #8B4513;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .info-title {
+            font-size: 1.3rem;
+            color: #D4AF37;
+            margin-bottom: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .info-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #F5DEB3;
+            text-align: center;
+        }
+
+        .progress {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #D4AF37;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .bingo-grid {
+                gap: 8px;
+                padding: 15px;
+            }
+            
+            .bingo-cell {
+                font-size: 0.8rem;
+                padding: 12px;
+                min-height: 100px;
+            }
+            
+            .info-section {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+            
+            .bingo-cell {
+                font-size: 0.75rem;
+                padding: 10px;
+                min-height: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">OSRS Slayer Event Bingo</h1>
+        <p class="subtitle">Complete tasks to fill your bingo board!</p>
+        
+        <div class="bingo-grid" id="bingoGrid">
+            <div class="bingo-cell" data-task="0">Complete 10 tasks</div>
+            <div class="bingo-cell" data-task="1">Kill 1 Superior</div>
+            <div class="bingo-cell" data-task="2">Obtain 1 Brimstone Key OR 1 Larran's Key</div>
+            <div class="bingo-cell" data-task="3">Complete 1 Konar task</div>
+            <div class="bingo-cell" data-task="4">Get a Hard or Elite clue scroll on-task</div>
+            <div class="bingo-cell" data-task="5">Finish 1 boss task (or 5 boss kills on-task)</div>
+            <div class="bingo-cell" data-task="6">Gain 100,000 Slayer XP during the event</div>
+            <div class="bingo-cell" data-task="7">Earn 50 Slayer points during the event</div>
+            <div class="bingo-cell" data-task="8">Receive an Ancient Shard or a Totem piece on-task</div>
+        </div>
+
+        <div class="progress" id="progress">
+            Completed: 0/9 tasks
+        </div>
+
+        <div class="info-section">
+            <h2 class="info-title">📸 Event Requirements</h2>
+            <p class="info-text">
+                <strong>Important:</strong> All tasks must be completed during the official event window and while on a Slayer assignment. 
+                Screenshots or video evidence may be required for verification. Make sure to capture your task completion, 
+                drops, and XP gains with timestamps visible. Tasks completed outside of assignments or the event period will not count.
+            </p>
+        </div>
+
+        <div class="info-section">
+            <h2 class="info-title">⚔️ How to Play</h2>
+            <p class="info-text">
+                Click on each cell to mark tasks as completed. Your progress is automatically saved. 
+                Complete all 9 tasks for a full bingo! Remember to stay on-task and within the event timeframe for all completions.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        class SlayerBingo {
+            constructor() {
+                this.completedTasks = new Set();
+                this.loadProgress();
+                this.initializeEventListeners();
+                this.updateProgress();
+            }
+
+            initializeEventListeners() {
+                const cells = document.querySelectorAll('.bingo-cell');
+                cells.forEach(cell => {
+                    cell.addEventListener('click', () => {
+                        const taskId = parseInt(cell.dataset.task);
+                        this.toggleTask(taskId, cell);
+                    });
+                });
+            }
+
+            toggleTask(taskId, cellElement) {
+                if (this.completedTasks.has(taskId)) {
+                    this.completedTasks.delete(taskId);
+                    cellElement.classList.remove('completed');
+                } else {
+                    this.completedTasks.add(taskId);
+                    cellElement.classList.add('completed');
+                }
+                
+                this.saveProgress();
+                this.updateProgress();
+            }
+
+            updateProgress() {
+                const progressElement = document.getElementById('progress');
+                const completed = this.completedTasks.size;
+                const total = 9;
+                
+                progressElement.textContent = `Completed: ${completed}/${total} tasks`;
+                
+                if (completed === total) {
+                    progressElement.innerHTML += ' 🎉 <strong style="color: #00FF00;">BINGO COMPLETE!</strong> 🎉';
+                }
+            }
+
+            saveProgress() {
+                localStorage.setItem('osrs-slayer-bingo-progress', JSON.stringify([...this.completedTasks]));
+            }
+
+            loadProgress() {
+                const saved = localStorage.getItem('osrs-slayer-bingo-progress');
+                if (saved) {
+                    const taskIds = JSON.parse(saved);
+                    this.completedTasks = new Set(taskIds);
+                    
+                    // Apply completed styling to saved tasks
+                    taskIds.forEach(taskId => {
+                        const cell = document.querySelector(`[data-task="${taskId}"]`);
+                        if (cell) {
+                            cell.classList.add('completed');
+                        }
+                    });
+                }
+            }
+        }
+
+        // Initialize the bingo game when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new SlayerBingo();
+        });
+    </script>
+</body>
+</html>
+
