@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OSRS Slayer 81 — One‑Page Cheatsheet + Block/Prefer Lists</title>
+<style>
+  :root{
+    --page-bg:#ffffff;
+    --text:#0f172a;         /* slate-900 */
+    --muted:#475569;        /* slate-600 */
+    --border:#e5e7eb;       /* gray-200 */
+    --badge-green:#16a34a;  /* green-600 */
+    --badge-blue:#2563eb;   /* blue-600 */
+    --badge-gold:#b7791f;   /* amber-700 */
+    --badge-red:#dc2626;    /* red-600 */
+    --badge-purple:#7c3aed; /* violet-600 */
+    --badge-gray:#374151;   /* gray-700 */
+    --badge-teal:#0d9488;   /* teal-600 */
+    --card-bg:#ffffff;
+  }
+  *{ box-sizing:border-box; }
+  html, body{
+    height:100%;
+  }
+  body{
+    margin:0;
+    background:var(--page-bg);
+    color:var(--text);
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    line-height:1.35;
+    font-size:14px;
+  }
+  .page{
+    max-width: 1120px; /* comfortable for two columns on screen */
+    margin:0 auto;
+    padding:16px;
+  }
+  header.page-header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:10px;
+    margin-bottom:12px;
+  }
+  header h1{
+    font-size:20px;
+    margin:0 0 2px 0;
+    line-height:1.2;
+    letter-spacing:0.2px;
+  }
+  header .subtitle{
+    color:var(--muted);
+    font-size:12.5px;
+    margin:0;
+  }
+  header .updated{
+    color:var(--muted);
+    font-size:11.5px;
+    white-space:nowrap;
+    align-self:flex-start;
+    margin-top:3px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:12px;
+  }
+  @media (max-width: 900px){
+    .grid{
+      grid-template-columns: 1fr;
+    }
+  }
+
+  section.card{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px 12px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  section.card h2{
+    margin:0 0 6px 0;
+    font-size:16px;
+    line-height:1.2;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .badge{
+    display:inline-block;
+    padding:2px 6px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:600;
+    color:#fff;
+    line-height:1.2;
+    letter-spacing:0.2px;
+    white-space:nowrap;
+  }
+  .badge.green{ background:var(--badge-green); }
+  .badge.blue{ background:var(--badge-blue); }
+  .badge.gold{ background:var(--badge-gold); }
+  .badge.red{ background:var(--badge-red); }
+  .badge.purple{ background:var(--badge-purple); }
+  .badge.gray{ background:var(--badge-gray); }
+  .badge.teal{ background:var(--badge-teal); }
+
+  .intro{
+    margin:2px 0 8px 0;
+    color:var(--muted);
+    font-size:12.5px;
+  }
+  .subhead{
+    margin:8px 0 4px 0;
+    font-weight:700;
+    font-size:13.5px;
+  }
+
+  /* Bulleted lines that preserve the "•" glyph verbatim */
+  ul.bulleted{
+    list-style:none;
+    padding-left:0;
+    margin:6px 0 6px 0;
+  }
+  ul.bulleted li{
+    margin:3px 0;
+  }
+
+  /* Enumerated task titles (1), 2), 3) ...) */
+  .task-title{
+    margin:8px 0 4px 0;
+    font-weight:700;
+    font-size:13.5px;
+  }
+
+  /* Tables */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  thead th{
+    text-align:left;
+    border-bottom:2px solid var(--border);
+    padding:6px 6px;
+    color:var(--muted);
+    font-weight:700;
+  }
+  td{
+    border-bottom:1px solid var(--border);
+    padding:6px 6px;
+    vertical-align:top;
+  }
+  tr:last-child td{
+    border-bottom:none;
+  }
+
+  /* Make table sections span both columns to avoid squishing */
+  .span-columns{
+    grid-column: 1 / -1;
+  }
+
+  footer.page-footer{
+    margin-top:14px;
+    color:var(--muted);
+    font-size:12.5px;
+    text-align:center;
+  }
+
+  /* Print styles */
+  @page{
+    size: A4;
+    margin: 10mm;
+  }
+  @media print{
+    body{
+      font-size:12.5px;
+    }
+    .page{
+      padding:0;
+      max-width:unset;
+    }
+    header.page-header{
+      margin-bottom:8px;
+      padding-bottom:6px;
+    }
+    .grid{
+      gap:8px;
+    }
+    section.card{
+      border-color:#ddd;
+      padding:8px 9px;
+    }
+    .badge{
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    table, tr, td, th, thead, tbody, section.card{
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+    footer.page-footer{
+      margin-top:8px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header" aria-label="Page Header">
+      <div>
+        <h1>OSRS Slayer 81 — One‑Page Cheatsheet + Block/Prefer Lists</h1>
+        <p class="subtitle">Fast XP • High Points • Profitable Loot</p>
+      </div>
+      <div class="updated">Updated: Aug 31, 2025</div>
+    </header>
+
+    <main class="grid" aria-label="Cheatsheet Content">
+      <!-- Fast XP -->
+      <section class="card" aria-labelledby="fast-xp">
+        <h2 id="fast-xp"><span class="badge green">Fast XP</span> Fast XP (Cannon Tasks)</h2>
+        <p class="intro">Prioritize dense, cannonable tasks for the best XP/hr at level 81. Keep 1–2k cballs and Stamina pots ready.</p>
+
+        <div class="task">
+          <div class="task-title">1) Dagannoths (Lighthouse)</div>
+          <ul class="bulleted">
+            <li>• Method: Place cannon centrally; tag spawns with Blowpipe or RCB + Broad Bolts.</li>
+            <li>• Gear: Elite Void or max Ranged; Ava’s; Blowpipe/RCB; cannon.</li>
+            <li>• Inventory: 1–2k cballs, 2–4 Prayer pots, Stamina, teleports, some food.</li>
+            <li>• Notes: Multi-area, fast respawns; pray Melee if face-tanking, step back to limit damage.</li>
+          </ul>
+        </div>
+
+        <div class="task">
+          <div class="task-title">2) Kalphites (Kalphite Lair – Workers/Soldiers)</div>
+          <ul class="bulleted">
+            <li>• Method: Cannon in the open Worker room; safe-spot around corners if needed.</li>
+            <li>• Gear: Ranged with Proselyte/Elite Void; Antipoison/Antidote; cannon.</li>
+            <li>• Inventory: 1–2k cballs, Antipoison, Prayer pots, Stamina, food.</li>
+            <li>• Notes: Very consistent XP; minimal travel once fairy ring configured (BIQ).</li>
+          </ul>
+        </div>
+
+        <div class="task">
+          <div class="task-title">3) Suqahs (Lunar Isle)</div>
+          <ul class="bulleted">
+            <li>• Method: Cannon in the north fields; keep Protect from Melee on.</li>
+            <li>• Gear: Ranged (Elite Void/Proselyte) + cannon; Lunar staff/teleport access.</li>
+            <li>• Inventory: 1–2k cballs, Prayer pots, Stamina, teleports, food.</li>
+            <li>• Notes: High density and easy pathing; bring seal of passage if needed.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Points Strategy -->
+      <section class="card" aria-labelledby="points">
+        <h2 id="points"><span class="badge blue">Points</span> Points Strategy (Turael Boost)</h2>
+        <ul class="bulleted">
+          <li>• Goal: Farm large streak bonus points while keeping tasks fast.</li>
+          <li>• Loop: Do tasks 1–9 at Turael (very quick), then take the 10th at Konar or Nieve/Steve for the big streak bonus.</li>
+          <li>• Streak: Aim for 100+ to maximize point payouts on milestone tasks.</li>
+          <li>• Skipping: If you get a slow task for your milestone, visit Turael to reassign without breaking your streak.</li>
+          <li>• Extras: Use Bracelet of Slaughter to extend favorite tasks; Expeditious bracelet to speed through ones you’re finishing before a milestone.</li>
+        </ul>
+      </section>
+
+      <!-- Profitable Loot Tasks -->
+      <section class="card" aria-labelledby="loot">
+        <h2 id="loot"><span class="badge gold">Loot</span> Profitable Loot Tasks</h2>
+        <p class="intro">Do these when you want steady GP with solid XP.</p>
+
+        <div class="task">
+          <div class="subhead">Gargoyles (75 Slayer)</div>
+          <ul class="bulleted">
+            <li>• GP/hr: ~600k steady.</li>
+            <li>• Method: Melee on Slayer Tower rooftop or tower floors; unlock “Gargoyle Smasher.”</li>
+            <li>• Gear: Melee DPS (whip or better), Prayer gear if flicking; bring Rock hammer.</li>
+            <li>• Tips: High-alch large drops; bring Nature runes/Law runes for tele.</li>
+          </ul>
+        </div>
+
+        <div class="task">
+          <div class="subhead">Nechryael (80 Slayer)</div>
+          <ul class="bulleted">
+            <li>• GP/hr: ~0.8–1.2M when bursting/barraging in Catacombs.</li>
+            <li>• Method: Ancient Magicks; group them and burst; use altar to sustain Prayer.</li>
+            <li>• Gear: Prayer bonus + Magic gear; optional cannon for melee method.</li>
+            <li>• Tips: Bracelet of Slaughter to extend; bank noted seeds/runes.</li>
+          </ul>
+        </div>
+
+        <div class="task">
+          <div class="subhead">Kurasks (70 Slayer)</div>
+          <ul class="bulleted">
+            <li>• GP/hr: ~400–500k consistent.</li>
+            <li>• Method: Must use leaf-bladed weapons or broad ammo; Protect from Melee.</li>
+            <li>• Gear: Leaf-bladed battleaxe/sword (melee) or Rune c’bow + Broad Bolts (ranged).</li>
+            <li>• Tips: Alch herbs/armor; bring anti-poison if using the Fremennik Dungeon.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Vorkath -->
+      <section class="card" aria-labelledby="boss">
+        <h2 id="boss"><span class="badge purple">Boss</span> Vorkath (Ranged) — Ready Reference</h2>
+        <ul class="bulleted">
+          <li>• Weapon: Dragon Hunter Crossbow. Start with Ruby (e) bolts, swap to Diamond (e) bolts sub-35–40% HP.</li>
+          <li>• Armor: Elite Void Ranger helm/top/robes/gloves for +12.5% dmg and +10% accuracy set bonus.</li>
+          <li>• Offhand: Dragonfire Ward (or Anti-dragon shield variants).</li>
+          <li>• Jewelry: Necklace of Anguish, Archer’s (i) ring, Ava’s Assembler, Pegasian boots.</li>
+          <li>• Potions: Ranging, Super/Extended Antifire, Anti-venom+, Stamina, Restores.</li>
+          <li>• Prayers: Protect from Magic; Rigour if unlocked.</li>
+          <li>• Notes: Walk during acid phase; dodge specials; keep antifire active at all times.</li>
+        </ul>
+      </section>
+
+      <!-- Block List (Table) -->
+      <section class="card span-columns" aria-labelledby="blocks">
+        <h2 id="blocks"><span class="badge red">Blocks</span> Block List (Always Block at 81)</h2>
+        <table aria-label="Block List">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Why Block</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Steel/Bronze/Iron Dragons</td>
+              <td>Very slow kills, can’t cannon; high supply drain</td>
+              <td>Save for when you have dragon-hunter setups.</td>
+            </tr>
+            <tr>
+              <td>Spiritual Creatures</td>
+              <td>Spread out; need god items/KC; poor XP/GP</td>
+              <td>Time-consuming at 81.</td>
+            </tr>
+            <tr>
+              <td>Wyrms</td>
+              <td>Slower kills, attention-heavy, large task sizes</td>
+              <td>Do later with stronger gear/levels.</td>
+            </tr>
+            <tr>
+              <td>Trolls / Ice Trolls</td>
+              <td>Travel time + mediocre XP</td>
+              <td>Only do if you need Frem boots unlocks.</td>
+            </tr>
+            <tr>
+              <td>Hellhounds</td>
+              <td>No loot; Cerb not available until 91 Slayer</td>
+              <td>Revisit at 91 for Cerberus.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Prefer List (Table) -->
+      <section class="card span-columns" aria-labelledby="prefer">
+        <h2 id="prefer"><span class="badge teal">Prefer</span> Prefer List (Weight These Higher)</h2>
+        <table aria-label="Prefer List">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Master</th>
+              <th>Why</th>
+              <th>Gear Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nechryael</td>
+              <td>Nieve/Steve or Konar</td>
+              <td>50–70k XP/hr bursting; big rune/seed GP</td>
+              <td>Ancient Magicks; Prayer gear; Slaughter to extend.</td>
+            </tr>
+            <tr>
+              <td>Gargoyles</td>
+              <td>Nieve/Steve or Konar</td>
+              <td>Steady 600k GP/hr; easy, low-risk</td>
+              <td>Melee DPS; Rock hammer; Gargoyle Smasher perk.</td>
+            </tr>
+            <tr>
+              <td>Dust Devils</td>
+              <td>Nieve/Steve or Konar</td>
+              <td>45–60k XP/hr bursting; rune piles</td>
+              <td>Burst in Smoke Dungeon or Catacombs; Prayer sustain.</td>
+            </tr>
+            <tr>
+              <td>Greater Demons (Chasm of Fire)</td>
+              <td>Konar</td>
+              <td>Cannonable, safe multi; totems/clues</td>
+              <td>Ranged + cannon; altar nearby.</td>
+            </tr>
+            <tr>
+              <td>Bloodvelds (Catacombs)</td>
+              <td>Nieve/Steve</td>
+              <td>40–50k XP/hr, AFK-friendly; totems</td>
+              <td>Melee + Prayer bonus; extend if you like AFK.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Optional Prefers -->
+      <section class="card" aria-labelledby="optional">
+        <h2 id="optional"><span class="badge purple">Optional</span> Optional Prefers (Unlocks)</h2>
+        <ul class="bulleted">
+          <li>• Abyssal Demons (85 Slayer) — Big whip money, great task flow.</li>
+          <li>• Kurasks — Consistent cash; leaf-bladed setups.</li>
+        </ul>
+      </section>
+
+      <!-- Skip but don't block -->
+      <section class="card" aria-labelledby="flexible">
+        <h2 id="flexible"><span class="badge gray">Flexible</span> Skip-But-Don’t-Block</h2>
+        <ul class="bulleted">
+          <li>• Drakes — Decent uniques but slow; do when you want variety.</li>
+          <li>• Black Demons — Good with cannon in Chasm or if you do Demonic Gorillas; otherwise slow.</li>
+        </ul>
+      </section>
+
+      <!-- Quick Inventory Lists -->
+      <section class="card" aria-labelledby="checklist">
+        <h2 id="checklist"><span class="badge gray">Checklist</span> Quick Inventory Lists</h2>
+        <ul class="bulleted">
+          <li>• Cannon Tasks Pack: Cannon + 1–2k cballs, 2–4 Prayer pots, Stamina, food, teleports, Antipoison (for Kalphites), runes for tele/alch.</li>
+          <li>• Bursting Pack: Runes (Blood/Ice), Prayer pots, Food, Rune pouch, Ancient spellbook, Salve (if applicable), Slaughter bracelets.</li>
+        </ul>
+      </section>
+
+      <!-- Task / Point Tips -->
+      <section class="card" aria-labelledby="tips">
+        <h2 id="tips"><span class="badge gray">Tips</span> Task/Point Tips</h2>
+        <ul class="bulleted">
+          <li>• Extend favorites (Nechs, Gargoyles, Dust Devils, Bloodvelds, Greater Demons).</li>
+          <li>• Keep a 100+ streak for maximum 10th/50th/100th task point bonuses.</li>
+          <li>• Prefer weights stack; don’t over-dilute—pick 3–5 favorites.</li>
+          <li>• Konar on milestones for big points + Brimstone keys.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="page-footer" aria-label="Footer">
+      To save as PDF: press Ctrl/Cmd+P → Destination: Save as PDF.
+    </footer>
+  </div>
+</body>
+</html>
+
